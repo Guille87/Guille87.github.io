@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="theme-color" content="#0c0a08">
+<meta name="description" content="Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles">
+<meta property="og:description" content="Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.">
+<meta property="og:image" content="https://guille87.github.io/favicon.png">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0c0a08;
+    --stone:#171310;
+    --stone-2:#1f1912;
+    --ember:#c65a26;
+    --ember-dim:#7a3416;
+    --gold:#c9a227;
+    --parchment:#e9decb;
+    --ash:#8f8575;
+    --line:#3a322a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--parchment);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .eyebrow{ font-family:'Cinzel', serif; letter-spacing:.03em; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+
+  ::selection{ background:var(--ember-dim); color:var(--parchment); }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px;
+    background:linear-gradient(to bottom, rgba(12,10,8,.92), rgba(12,10,8,0));
+    backdrop-filter:blur(2px);
+  }
+  .nav-mark{ font-family:'Cinzel', serif; font-weight:600; font-size:15px; color:var(--gold); border:1px solid var(--line); padding:6px 11px; }
+  .nav-links{ display:flex; gap:28px; }
+  .nav-links a{ font-size:13px; color:var(--ash); text-transform:uppercase; letter-spacing:.08em; transition:color .2s; }
+  .nav-links a:hover{ color:var(--gold); }
+  .nav-toggle{ display:none; background:none; border:1px solid var(--line); color:var(--parchment); font-size:18px; padding:6px 10px; cursor:pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    padding:120px 0 80px;
+    background:
+      radial-gradient(ellipse 60% 45% at 30% 20%, rgba(198,90,38,.10), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201,162,39,.06), transparent 60%);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .embers{ position:fixed; inset:0; pointer-events:none; z-index:-1; }
+  .ember-particle{
+    position:absolute; bottom:-10px; width:3px; height:3px; border-radius:50%;
+    background:var(--ember); box-shadow:0 0 6px 1px rgba(198,90,38,.6);
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0; }
+    10%{ opacity:.8; }
+    90%{ opacity:.4; }
+    100%{ transform:translateY(-100vh) translateX(20px); opacity:0; }
+  }
+  .hero-inner{ position:relative; z-index:2; max-width:640px; }
+  .hero-eyebrow{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px; }
+  .hero-eyebrow::before{ content:''; width:26px; height:1px; background:var(--gold); }
+  .hero h1{ font-size:clamp(32px, 5.5vw, 52px); font-weight:600; line-height:1.1; margin-bottom:14px; }
+  .hero-role{ font-size:18px; color:var(--ash); margin-bottom:22px; }
+  .hero-role strong{ color:var(--parchment); font-weight:500; }
+  .hero p.pitch{ font-size:16px; color:var(--ash); max-width:520px; margin-bottom:34px; }
+  .sigils{ display:flex; gap:14px; flex-wrap:wrap; }
+  .sigil{
+    border:1px solid var(--line); padding:11px 18px; font-size:13px;
+    display:inline-flex; align-items:center; gap:8px; transition:border-color .2s, color .2s;
+    color:var(--ash);
+  }
+  .sigil:hover{ border-color:var(--gold); color:var(--gold); }
+  .sigil.primary{ border-color:var(--ember-dim); color:var(--parchment); }
+  .sigil.primary:hover{ border-color:var(--ember); color:var(--ember); }
+
+  /* ---------- SECTION GENERICS ---------- */
+  section{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .eyebrow{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .section-head{ margin-bottom:52px; }
+  .section-head h2{ font-size:32px; font-weight:600; }
+
+  /* ---------- SOBRE MI ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:56px; }
+  .about-grid p{ color:var(--ash); font-size:16px; margin-bottom:16px; }
+  .about-grid p strong{ color:var(--parchment); font-weight:500; }
+  .vitals{ border-left:1px solid var(--line); padding-left:28px; }
+  .vital{ margin-bottom:20px; }
+  .vital-label{ font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--ash); margin-bottom:4px; }
+  .vital-value{ font-size:15px; color:var(--parchment); }
+
+  /* ---------- SKILLS: HOJA DE PERSONAJE ---------- */
+  .skills-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .stat-block{ background:var(--stone); padding:32px; }
+  .stat-block h3{ font-size:17px; margin-bottom:6px; color:var(--parchment); }
+  .stat-block .stat-desc{ font-size:13px; color:var(--ash); margin-bottom:20px; }
+  .stat-row{ margin-bottom:16px; }
+  .stat-row:last-child{ margin-bottom:0; }
+  .stat-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+  .stat-name{ font-size:13px; color:var(--parchment); }
+  .stat-tag{ font-size:10px; color:var(--ash); }
+  .bar{ height:6px; background:var(--void); border:1px solid var(--line); position:relative; overflow:hidden; }
+  .bar-fill{ height:100%; background:linear-gradient(90deg, var(--ember-dim), var(--ember)); position:relative; }
+  .bar-fill::after{
+    content:''; position:absolute; inset:0;
+    background-image:repeating-linear-gradient(90deg, rgba(12,10,8,.5) 0 1px, transparent 1px 12px);
+  }
+
+  /* ---------- CRONICA / TIMELINE ---------- */
+  .timeline{ position:relative; padding-left:28px; }
+  .timeline::before{ content:''; position:absolute; left:0; top:6px; bottom:6px; width:1px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:44px; padding-left:28px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:''; position:absolute; left:-4.5px; top:5px; width:9px; height:9px;
+    background:var(--gold); transform:rotate(45deg); border:1px solid var(--void);
+  }
+  .tl-period{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold); margin-bottom:6px; }
+  .tl-item h3{ font-size:18px; margin-bottom:6px; }
+  .tl-item p{ font-size:14px; color:var(--ash); max-width:560px; }
+  .tl-note{ margin-top:36px; padding:16px 20px; border:1px dashed var(--line); font-size:13px; color:var(--ash); }
+  .tl-note strong{ color:var(--gold); font-weight:500; }
+
+  /* ---------- PROYECTOS ---------- */
+  .projects-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:24px; }
+  .project-card{ border:1px solid var(--line); background:var(--stone); padding:32px; position:relative; display:flex; flex-direction:column; }
+  .project-status{
+    display:inline-flex; align-items:center; gap:8px; font-size:11px; text-transform:uppercase;
+    letter-spacing:.08em; color:var(--gold); border:1px solid var(--ember-dim); padding:6px 12px; margin-bottom:18px; align-self:flex-start;
+  }
+  .project-status::before{ content:''; width:6px; height:6px; background:var(--ember); border-radius:50%; box-shadow:0 0 6px 1px rgba(198,90,38,.7); }
+  .project-status.paused{ color:var(--ash); border-color:var(--line); }
+  .project-status.paused::before{ background:var(--ash); box-shadow:none; }
+  .project-card h3{ font-size:21px; margin-bottom:6px; }
+  .project-names{ font-size:13px; color:var(--ash); margin-bottom:16px; }
+  .project-names span{ color:var(--parchment); }
+  .project-card p{ font-size:14px; color:var(--ash); margin-bottom:20px; flex-grow:1; }
+  .project-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+  .ptag{ font-size:11px; border:1px solid var(--line); padding:5px 10px; color:var(--ash); }
+  .project-links{ display:flex; gap:10px; flex-wrap:wrap; }
+  .project-links .sigil{ padding:8px 14px; font-size:12px; }
+  @media (max-width:900px){ .projects-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- CONTACTO ---------- */
+  footer{ padding:100px 0 60px; text-align:left; }
+  footer h2{ font-size:34px; margin-bottom:16px; max-width:480px; }
+  footer p.sub{ color:var(--ash); margin-bottom:36px; max-width:480px; }
+  .fine{ margin-top:70px; font-size:12px; color:var(--ash); display:flex; justify-content:space-between; border-top:1px solid var(--line); padding-top:24px; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .ember-particle{ animation:none; display:none; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  @media (max-width:760px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+    .about-grid{ grid-template-columns:1fr; }
+    .vitals{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px; }
+    .skills-grid{ grid-template-columns:1fr; }
+    section{ padding:70px 0; }
+    .hero{ padding-top:110px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-mark">GAD</div>
+  <div class="nav-links">
+    <a href="#">Inicio</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#cronica">Trayectoria</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">≡</button>
+</nav>
+
+<section class="hero">
+  <div class="embers" id="embers"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Videojuegos · Apps móviles · Desarrollo de software</div>
+      <h1>Guillermo Amado Díaz</h1>
+      <p class="hero-role">Desarrollador de <strong>videojuegos y aplicaciones móviles</strong>.</p>
+      <p class="pitch">Ahora mismo mantengo Sudoku Master: Classic Logic (publicado en Google Play) y sigo ampliando Vektra, un bot de Discord en producción, mientras retomo un proyecto propio de videojuego en Unity.</p>
+      <div class="sigils">
+        <a class="sigil primary" href="mailto:guillermo_amado@hotmail.es">✉ Contactar</a>
+        <a class="sigil" href="https://github.com/Guille87" target="_blank" rel="noopener">GitHub</a>
+        <a class="sigil" href="https://www.linkedin.com/in/guillermo-amado-d%C3%ADaz/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="sigil" href="#proyectos">Ver proyectos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre-mi">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">El desarrollador</div>
+      <h2>Sobre mí</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Soy desarrollador de <strong>videojuegos y aplicaciones móviles</strong>. Me gusta llevar los proyectos hasta el final, no solo hasta el prototipo.</p>
+        <p>Ahora mismo eso significa mantener <strong>Sudoku Master: Classic Logic</strong> publicado en Google Play, seguir ampliando <strong>Vektra</strong> (un bot de Discord en producción), y retomar pronto mi propio proyecto de videojuego en Unity, que tengo aparcado mientras termino de definir sus ideas.</p>
+      </div>
+      <div class="vitals">
+        <div class="vital">
+          <div class="vital-label">Ubicación</div>
+          <div class="vital-value">A Coruña, Galicia, España</div>
+        </div>
+        <div class="vital">
+          <div class="vital-label">Áreas</div>
+          <div class="vital-value">Videojuegos · Apps móviles · Bots</div>
+        </div>
+        <div class="vital">
+          <div class="vital-label">Stack</div>
+          <div class="vital-value">Unity/C# · Kotlin/Compose · Node.js</div>
+        </div>
+        <div class="vital">
+          <div class="vital-label">Ahora mismo</div>
+          <div class="vital-value">Sudoku Master: Classic Logic &amp; Vektra en producción</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Hoja de personaje</div>
+      <h2>Habilidades</h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="stat-block">
+        <h3>Arquitectura y código</h3>
+        <p class="stat-desc">C# limpio, escalable y probado.</p>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">SOLID y patrones de diseño</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Inyección de dependencias</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Eventos e interfaces</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:88%"></div></div>
+        </div>
+      </div>
+
+      <div class="stat-block">
+        <h3>Sistemas Unity</h3>
+        <p class="stat-desc">Dominio del motor y su ciclo de vida.</p>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">ScriptableObjects</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">New Input System</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Cinemachine</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+
+      <div class="stat-block">
+        <h3>Optimización</h3>
+        <p class="stat-desc">Rendimiento como parte del diseño, no un parche.</p>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Object pooling</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Gestión de GC y draw calls</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Addressables y carga async</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
+        </div>
+      </div>
+
+      <div class="stat-block">
+        <h3>Herramientas y práctica</h3>
+        <p class="stat-desc">El oficio detrás del código.</p>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Git y control de versiones</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Profiler y diagnóstico</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Testing unitario</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+
+      <div class="stat-block">
+        <h3>Android / Kotlin</h3>
+        <p class="stat-desc">De Android Studio a una app publicada en Google Play.</p>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Kotlin</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Jetpack Compose</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Publicación en Google Play</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+
+      <div class="stat-block">
+        <h3>Node.js / Bots</h3>
+        <p class="stat-desc">Servicios en producción, no solo scripts.</p>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Node.js</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">Discord.js / APIs REST</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-top"><span class="stat-name">SQLite y persistencia</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="cronica">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Trayectoria</div>
+      <h2>Crónica</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-period">Julio 2026</div>
+        <h3>Vektra: Ahorcado, roles por reacción, recordatorios y Premium</h3>
+        <p>Retomé el desarrollo de <strong>Vektra</strong> tras varios meses parado, añadiendo un minijuego competitivo de Ahorcado (rankings, rachas, duelos), asignación de roles por reacción, recordatorios y un tier Premium para apoyar el bot.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Julio 2026</div>
+        <h3>Primer prototipo del roguelite de horda medieval</h3>
+        <p>Un primer acercamiento de 2-3 días a un proyecto propio en Unity, todavía con arte y sistemas placeholder. En pausa hasta tener claras las mecánicas principales.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Marzo — Mayo 2026</div>
+        <h3>Sudoku Master: Classic Logic</h3>
+        <p>Desarrollo desde cero hasta su publicación en Google Play en poco más de un mes y medio (21 de mayo de 2026), con actualizaciones y correcciones continuas desde entonces.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Marzo 2026</div>
+        <h3>Primer prototipo de Vektra</h3>
+        <p>Una semana implementando la traducción de canales en tiempo real, antes de aparcarlo para centrarme en el desarrollo de <strong>Sudoku Master: Classic Logic</strong>.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">2024 — 2025</div>
+        <h3>Curso de Especialización en Desarrollo de Videojuegos y Realidad Virtual</h3>
+        <p>Formación específica en desarrollo de videojuegos y realidad virtual, tras los ciclos de FP, para profundizar en el área que más me interesaba. Como proyecto (opcional) del curso, desarrollé <strong>Purrfect Chaos</strong>, un plataformas 2D en Unity.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">Enero 2022 — Abril 2023</div>
+        <h3>Firmatel — Desarrollador de aplicaciones móviles</h3>
+        <p>Único desarrollador móvil de la empresa: construí desde cero una app de fichaje (registro de entrada y salida de la jornada laboral), conectada a la base de datos y estructura ya existente de su plataforma web.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-period">2018 — 2021</div>
+        <h3>DAM y DAW — Grado Superior</h3>
+        <p>Compaginé ambos ciclos formativos, alternando cursos entre Desarrollo de Aplicaciones Multiplataforma (DAM) y Desarrollo de Aplicaciones Web (DAW) hasta completar los dos títulos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="eyebrow">Lo que he construido</div>
+      <h2>Proyectos</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-status">Publicado en Google Play</div>
+        <h3>Sudoku Master: Classic Logic</h3>
+        <div class="project-names">App móvil de Sudoku clásico</div>
+        <p>Juego de Sudoku para Android, publicado y disponible para descarga, con soporte multi-idioma y estadísticas de progreso.</p>
+        <div class="project-tags">
+          <span class="ptag mono">Kotlin</span>
+          <span class="ptag mono">Jetpack Compose</span>
+          <span class="ptag mono">Android Studio</span>
+        </div>
+        <div class="project-links">
+          <a class="sigil primary" href="https://play.google.com/store/apps/details?id=com.osirisstudio.sudokumaster" target="_blank" rel="noopener">Ver en Google Play</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-status">En producción</div>
+        <h3>Vektra</h3>
+        <div class="project-names">Bot de Discord</div>
+        <p>Traducción de canales en tiempo real, un minijuego de Ahorcado competitivo (rankings, rachas, duelos, logros), roles por reacción, recordatorios y un tier Premium. En desarrollo activo, con nuevas funciones constantemente.</p>
+        <div class="project-tags">
+          <span class="ptag mono">Node.js</span>
+          <span class="ptag mono">Discord.js</span>
+          <span class="ptag mono">SQLite</span>
+        </div>
+        <div class="project-links">
+          <a class="sigil primary" href="https://discord.com/oauth2/authorize?client_id=1476333421050728458&scope=bot%20applications.commands&permissions=537218048" target="_blank" rel="noopener">Invitar al bot</a>
+          <a class="sigil" href="https://discord.gg/JXSqdHF" target="_blank" rel="noopener">Discord de soporte</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-status paused">En pausa</div>
+        <h3>Roguelite de horda medieval</h3>
+        <div class="project-names">Proyecto personal en Unity</div>
+        <p>Juego de supervivencia contra hordas ambientado en fantasía medieval. Aparcado mientras termino de definir el diseño — lo retomaré.</p>
+        <div class="project-tags">
+          <span class="ptag mono">Unity</span>
+          <span class="ptag mono">C#</span>
+          <span class="ptag mono">ScriptableObjects</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-status">Publicado en itch.io</div>
+        <h3>Purrfect Chaos</h3>
+        <div class="project-names">Plataformas 2D — proyecto del Curso de Especialización</div>
+        <p>Plataformas 2D retro en pixel art: controlas a un gato travieso que debe romper el mayor número de objetos frágiles posible mientras esquiva a los perros que intentan detenerlo.</p>
+        <div class="project-tags">
+          <span class="ptag mono">Unity</span>
+          <span class="ptag mono">C#</span>
+          <span class="ptag mono">Pixel Art</span>
+        </div>
+        <div class="project-links">
+          <a class="sigil primary" href="https://osirisftw.itch.io/purrfect-chaos" target="_blank" rel="noopener">Jugar en itch.io</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap reveal">
+    <h2>Forjemos algo juntos</h2>
+    <p class="sub">Si buscas a alguien que se tome la arquitectura y el rendimiento tan en serio como el propio juego, hablemos.</p>
+    <div class="sigils">
+      <a class="sigil primary" href="mailto:guillermo_amado@hotmail.es">✉ guillermo_amado@hotmail.es</a>
+      <a class="sigil" href="https://github.com/Guille87" target="_blank" rel="noopener">GitHub</a>
+      <a class="sigil" href="https://www.linkedin.com/in/guillermo-amado-d%C3%ADaz/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="fine">
+      <span>Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles</span>
+      <span>© 2026 · A Coruña, España</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var emberContainer = document.getElementById('embers');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced && emberContainer){
+    for(var i=0;i<18;i++){
+      var e = document.createElement('div');
+      e.className = 'ember-particle';
+      e.style.left = (Math.random()*100) + '%';
+      e.style.animationDuration = (7 + Math.random()*8) + 's';
+      e.style.animationDelay = (Math.random()*10) + 's';
+      emberContainer.appendChild(e);
+    }
+  }
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  var toggle = document.getElementById('navToggle');
+  var navLinks = document.querySelector('.nav-links');
+  if(toggle){
+    toggle.addEventListener('click', function(){
+      var open = navLinks.style.display === 'flex';
+      navLinks.style.display = open ? 'none' : 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '60px';
+      navLinks.style.right = '32px';
+      navLinks.style.background = 'var(--stone)';
+      navLinks.style.border = '1px solid var(--line)';
+      navLinks.style.padding = '16px 20px';
+      navLinks.style.gap = '14px';
+    });
+  }
+</script>
+
+</body>
+</html>
