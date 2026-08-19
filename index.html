@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles</title>
+<title id="pageTitle">Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="theme-color" content="#0c0a08">
-<meta name="description" content="Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.">
+<meta id="metaDescription" name="description" content="Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles">
-<meta property="og:description" content="Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.">
+<meta id="ogTitle" property="og:title" content="Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles">
+<meta id="ogDescription" property="og:description" content="Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.">
 <meta property="og:image" content="https://guille87.github.io/favicon.png">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,10 +54,20 @@
     backdrop-filter:blur(2px);
   }
   .nav-mark{ font-family:'Cinzel', serif; font-weight:600; font-size:15px; color:var(--gold); border:1px solid var(--line); padding:6px 11px; }
+  .nav-right{ display:flex; align-items:center; gap:22px; }
   .nav-links{ display:flex; gap:28px; }
   .nav-links a{ font-size:13px; color:var(--ash); text-transform:uppercase; letter-spacing:.08em; transition:color .2s; }
   .nav-links a:hover{ color:var(--gold); }
   .nav-toggle{ display:none; background:none; border:1px solid var(--line); color:var(--parchment); font-size:18px; padding:6px 10px; cursor:pointer; }
+  .lang-toggle{
+    background:none; border:1px solid var(--line); color:var(--ash); font-size:12px;
+    letter-spacing:.06em; padding:6px 11px; cursor:pointer; font-family:'JetBrains Mono', monospace;
+    transition:border-color .2s, color .2s;
+  }
+  .lang-toggle:hover{ border-color:var(--gold); color:var(--gold); }
+  .lang-toggle span{ opacity:.4; }
+  .lang-toggle[data-lang="es"] .lang-es{ opacity:1; color:var(--gold); }
+  .lang-toggle[data-lang="en"] .lang-en{ opacity:1; color:var(--gold); }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -197,30 +207,35 @@
 
 <nav class="nav">
   <div class="nav-mark">GAD</div>
-  <div class="nav-links">
-    <a href="#">Inicio</a>
-    <a href="#sobre-mi">Sobre mí</a>
-    <a href="#habilidades">Habilidades</a>
-    <a href="#cronica">Trayectoria</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="#contacto">Contacto</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#" data-i18n="nav-inicio">Inicio</a>
+      <a href="#sobre-mi" data-i18n="nav-sobre">Sobre mí</a>
+      <a href="#habilidades" data-i18n="nav-habilidades">Habilidades</a>
+      <a href="#cronica" data-i18n="nav-cronica">Trayectoria</a>
+      <a href="#proyectos" data-i18n="nav-proyectos">Proyectos</a>
+      <a href="#contacto" data-i18n="nav-contacto">Contacto</a>
+    </div>
+    <button class="lang-toggle" id="langToggle" data-lang="es" aria-label="Cambiar idioma / Switch language">
+      <span class="lang-es">ES</span> / <span class="lang-en">EN</span>
+    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" data-i18n-attr="aria-label" data-i18n="nav-toggle-aria">≡</button>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">≡</button>
 </nav>
 
 <section class="hero">
   <div class="embers" id="embers"></div>
   <div class="wrap">
     <div class="hero-inner">
-      <div class="hero-eyebrow">Videojuegos · Apps móviles · Desarrollo de software</div>
+      <div class="hero-eyebrow" data-i18n="hero-eyebrow">Videojuegos · Apps móviles · Desarrollo de software</div>
       <h1>Guillermo Amado Díaz</h1>
-      <p class="hero-role">Desarrollador de <strong>videojuegos y aplicaciones móviles</strong>.</p>
-      <p class="pitch">Ahora mismo mantengo Sudoku Master: Classic Logic (publicado en Google Play) y sigo ampliando Vektra, un bot de Discord en producción, mientras retomo un proyecto propio de videojuego en Unity.</p>
+      <p class="hero-role" data-i18n="hero-role">Desarrollador de <strong>videojuegos y aplicaciones móviles</strong>.</p>
+      <p class="pitch" data-i18n="hero-pitch">Ahora mismo mantengo Sudoku Master: Classic Logic (publicado en Google Play) y sigo ampliando Vektra, un bot de Discord en producción, mientras retomo un proyecto propio de videojuego en Unity.</p>
       <div class="sigils">
-        <a class="sigil primary" href="mailto:guillermo_amado@hotmail.es">✉ Contactar</a>
+        <a class="sigil primary" href="mailto:guillermo_amado@hotmail.es" data-i18n="hero-contact">✉ Contactar</a>
         <a class="sigil" href="https://github.com/Guille87" target="_blank" rel="noopener">GitHub</a>
         <a class="sigil" href="https://www.linkedin.com/in/guillermo-amado-d%C3%ADaz/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="sigil" href="#proyectos">Ver proyectos</a>
+        <a class="sigil" href="#proyectos" data-i18n="hero-viewprojects">Ver proyectos</a>
       </div>
     </div>
   </div>
@@ -229,30 +244,30 @@
 <section id="sobre-mi">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="eyebrow">El desarrollador</div>
-      <h2>Sobre mí</h2>
+      <div class="eyebrow" data-i18n="about-eyebrow">El desarrollador</div>
+      <h2 data-i18n="about-h2">Sobre mí</h2>
     </div>
     <div class="about-grid">
       <div>
-        <p>Soy desarrollador de <strong>videojuegos y aplicaciones móviles</strong>. Me gusta llevar los proyectos hasta el final, no solo hasta el prototipo.</p>
-        <p>Ahora mismo eso significa mantener <strong>Sudoku Master: Classic Logic</strong> publicado en Google Play, seguir ampliando <strong>Vektra</strong> (un bot de Discord en producción), y retomar pronto mi propio proyecto de videojuego en Unity, que tengo aparcado mientras termino de definir sus ideas.</p>
+        <p data-i18n="about-p1">Soy desarrollador de <strong>videojuegos y aplicaciones móviles</strong>. Me gusta llevar los proyectos hasta el final, no solo hasta el prototipo.</p>
+        <p data-i18n="about-p2">Ahora mismo eso significa mantener <strong>Sudoku Master: Classic Logic</strong> publicado en Google Play, seguir ampliando <strong>Vektra</strong> (un bot de Discord en producción), y retomar pronto mi propio proyecto de videojuego en Unity, que tengo aparcado mientras termino de definir sus ideas.</p>
       </div>
       <div class="vitals">
         <div class="vital">
-          <div class="vital-label">Ubicación</div>
-          <div class="vital-value">A Coruña, Galicia, España</div>
+          <div class="vital-label" data-i18n="vital-loc-label">Ubicación</div>
+          <div class="vital-value" data-i18n="vital-loc-value">A Coruña, Galicia, España</div>
         </div>
         <div class="vital">
-          <div class="vital-label">Áreas</div>
-          <div class="vital-value">Videojuegos · Apps móviles · Bots</div>
+          <div class="vital-label" data-i18n="vital-areas-label">Áreas</div>
+          <div class="vital-value" data-i18n="vital-areas-value">Videojuegos · Apps móviles · Bots</div>
         </div>
         <div class="vital">
-          <div class="vital-label">Stack</div>
+          <div class="vital-label" data-i18n="vital-stack-label">Stack</div>
           <div class="vital-value">Unity/C# · Kotlin/Compose · Node.js</div>
         </div>
         <div class="vital">
-          <div class="vital-label">Ahora mismo</div>
-          <div class="vital-value">Sudoku Master: Classic Logic &amp; Vektra en producción</div>
+          <div class="vital-label" data-i18n="vital-now-label">Ahora mismo</div>
+          <div class="vital-value" data-i18n="vital-now-value">Sudoku Master: Classic Logic &amp; Vektra en producción</div>
         </div>
       </div>
     </div>
@@ -262,109 +277,109 @@
 <section id="habilidades">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="eyebrow">Hoja de personaje</div>
-      <h2>Habilidades</h2>
+      <div class="eyebrow" data-i18n="skills-eyebrow">Hoja de personaje</div>
+      <h2 data-i18n="skills-h2">Habilidades</h2>
     </div>
     <div class="skills-grid">
 
       <div class="stat-block">
-        <h3>Arquitectura y código</h3>
-        <p class="stat-desc">C# limpio, escalable y probado.</p>
+        <h3 data-i18n="b1-h3">Arquitectura y código</h3>
+        <p class="stat-desc" data-i18n="b1-desc">C# limpio, escalable y probado.</p>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">SOLID y patrones de diseño</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b1-s1-name">SOLID y patrones de diseño</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Inyección de dependencias</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b1-s2-name">Inyección de dependencias</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Eventos e interfaces</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b1-s3-name">Eventos e interfaces</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:88%"></div></div>
         </div>
       </div>
 
       <div class="stat-block">
-        <h3>Sistemas Unity</h3>
-        <p class="stat-desc">Dominio del motor y su ciclo de vida.</p>
+        <h3 data-i18n="b2-h3">Sistemas Unity</h3>
+        <p class="stat-desc" data-i18n="b2-desc">Dominio del motor y su ciclo de vida.</p>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">ScriptableObjects</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name">ScriptableObjects</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">New Input System</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name">New Input System</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Cinemachine</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name">Cinemachine</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
         </div>
       </div>
 
       <div class="stat-block">
-        <h3>Optimización</h3>
-        <p class="stat-desc">Rendimiento como parte del diseño, no un parche.</p>
+        <h3 data-i18n="b3-h3">Optimización</h3>
+        <p class="stat-desc" data-i18n="b3-desc">Rendimiento como parte del diseño, no un parche.</p>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Object pooling</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b3-s1-name">Object pooling</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Gestión de GC y draw calls</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b3-s2-name">Gestión de GC y draw calls</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Addressables y carga async</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b3-s3-name">Addressables y carga async</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
         </div>
       </div>
 
       <div class="stat-block">
-        <h3>Herramientas y práctica</h3>
-        <p class="stat-desc">El oficio detrás del código.</p>
+        <h3 data-i18n="b4-h3">Herramientas y práctica</h3>
+        <p class="stat-desc" data-i18n="b4-desc">El oficio detrás del código.</p>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Git y control de versiones</span><span class="stat-tag mono">AVANZADO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b4-s1-name">Git y control de versiones</span><span class="stat-tag mono" data-i18n="tag-adv">AVANZADO</span></div>
           <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Profiler y diagnóstico</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b4-s2-name">Profiler y diagnóstico</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Testing unitario</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b4-s3-name">Testing unitario</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
         </div>
       </div>
 
       <div class="stat-block">
         <h3>Android / Kotlin</h3>
-        <p class="stat-desc">De Android Studio a una app publicada en Google Play.</p>
+        <p class="stat-desc" data-i18n="b5-desc">De Android Studio a una app publicada en Google Play.</p>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Kotlin</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name">Kotlin</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Jetpack Compose</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name">Jetpack Compose</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Publicación en Google Play</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b5-s3-name">Publicación en Google Play</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
         </div>
       </div>
 
       <div class="stat-block">
         <h3>Node.js / Bots</h3>
-        <p class="stat-desc">Servicios en producción, no solo scripts.</p>
+        <p class="stat-desc" data-i18n="b6-desc">Servicios en producción, no solo scripts.</p>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Node.js</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name">Node.js</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">Discord.js / APIs REST</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b6-s2-name">Discord.js / APIs REST</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:78%"></div></div>
         </div>
         <div class="stat-row">
-          <div class="stat-top"><span class="stat-name">SQLite y persistencia</span><span class="stat-tag mono">SÓLIDO</span></div>
+          <div class="stat-top"><span class="stat-name" data-i18n="b6-s3-name">SQLite y persistencia</span><span class="stat-tag mono" data-i18n="tag-solid">SÓLIDO</span></div>
           <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
         </div>
       </div>
@@ -376,44 +391,44 @@
 <section id="cronica">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="eyebrow">Trayectoria</div>
-      <h2>Crónica</h2>
+      <div class="eyebrow" data-i18n="cronica-eyebrow">Trayectoria</div>
+      <h2 data-i18n="cronica-h2">Crónica</h2>
     </div>
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-period">Julio 2026</div>
-        <h3>Vektra: Ahorcado, roles por reacción, recordatorios y Premium</h3>
-        <p>Retomé el desarrollo de <strong>Vektra</strong> tras varios meses parado, añadiendo un minijuego competitivo de Ahorcado (rankings, rachas, duelos), asignación de roles por reacción, recordatorios y un tier Premium para apoyar el bot.</p>
+        <div class="tl-period" data-i18n="tl1-period">Julio 2026</div>
+        <h3 data-i18n="tl1-h3">Vektra: Ahorcado, roles por reacción, recordatorios y Premium</h3>
+        <p data-i18n="tl1-p">Retomé el desarrollo de <strong>Vektra</strong> tras varios meses parado, añadiendo un minijuego competitivo de Ahorcado (rankings, rachas, duelos), asignación de roles por reacción, recordatorios y un tier Premium para apoyar el bot.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-period">Julio 2026</div>
-        <h3>Primer prototipo del roguelite de horda medieval</h3>
-        <p>Un primer acercamiento de 2-3 días a un proyecto propio en Unity, todavía con arte y sistemas placeholder. En pausa hasta tener claras las mecánicas principales.</p>
+        <div class="tl-period" data-i18n="tl2-period">Julio 2026</div>
+        <h3 data-i18n="tl2-h3">Primer prototipo del roguelite de horda medieval</h3>
+        <p data-i18n="tl2-p">Un primer acercamiento de 2-3 días a un proyecto propio en Unity, todavía con arte y sistemas placeholder. En pausa hasta tener claras las mecánicas principales.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-period">Marzo — Mayo 2026</div>
-        <h3>Sudoku Master: Classic Logic</h3>
-        <p>Desarrollo desde cero hasta su publicación en Google Play en poco más de un mes y medio (21 de mayo de 2026), con actualizaciones y correcciones continuas desde entonces.</p>
+        <div class="tl-period" data-i18n="tl3-period">Marzo — Mayo 2026</div>
+        <h3 data-i18n="tl3-h3">Sudoku Master: Classic Logic</h3>
+        <p data-i18n="tl3-p">Desarrollo desde cero hasta su publicación en Google Play en poco más de un mes y medio (21 de mayo de 2026), con actualizaciones y correcciones continuas desde entonces.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-period">Marzo 2026</div>
-        <h3>Primer prototipo de Vektra</h3>
-        <p>Una semana implementando la traducción de canales en tiempo real, antes de aparcarlo para centrarme en el desarrollo de <strong>Sudoku Master: Classic Logic</strong>.</p>
+        <div class="tl-period" data-i18n="tl4-period">Marzo 2026</div>
+        <h3 data-i18n="tl4-h3">Primer prototipo de Vektra</h3>
+        <p data-i18n="tl4-p">Una semana implementando la traducción de canales en tiempo real, antes de aparcarlo para centrarme en el desarrollo de <strong>Sudoku Master: Classic Logic</strong>.</p>
       </div>
       <div class="tl-item">
         <div class="tl-period">2024 — 2025</div>
-        <h3>Curso de Especialización en Desarrollo de Videojuegos y Realidad Virtual</h3>
-        <p>Formación específica en desarrollo de videojuegos y realidad virtual, tras los ciclos de FP, para profundizar en el área que más me interesaba. Como proyecto (opcional) del curso, desarrollé <strong>Purrfect Chaos</strong>, un plataformas 2D en Unity.</p>
+        <h3 data-i18n="tl5-h3">Curso de Especialización en Desarrollo de Videojuegos y Realidad Virtual</h3>
+        <p data-i18n="tl5-p">Formación específica en desarrollo de videojuegos y realidad virtual, tras los ciclos de FP, para profundizar en el área que más me interesaba. Como proyecto (opcional) del curso, desarrollé <strong>Purrfect Chaos</strong>, un plataformas 2D en Unity.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-period">Enero 2022 — Abril 2023</div>
-        <h3>Firmatel — Desarrollador de aplicaciones móviles</h3>
-        <p>Único desarrollador móvil de la empresa: construí desde cero una app de fichaje (registro de entrada y salida de la jornada laboral), conectada a la base de datos y estructura ya existente de su plataforma web.</p>
+        <div class="tl-period" data-i18n="tl6-period">Enero 2022 — Abril 2023</div>
+        <h3 data-i18n="tl6-h3">Firmatel — Desarrollador de aplicaciones móviles</h3>
+        <p data-i18n="tl6-p">Único desarrollador móvil de la empresa: construí desde cero una app de fichaje (registro de entrada y salida de la jornada laboral), conectada a la base de datos y estructura ya existente de su plataforma web.</p>
       </div>
       <div class="tl-item">
         <div class="tl-period">2018 — 2021</div>
-        <h3>DAM y DAW — Grado Superior</h3>
-        <p>Compaginé ambos ciclos formativos, alternando cursos entre Desarrollo de Aplicaciones Multiplataforma (DAM) y Desarrollo de Aplicaciones Web (DAW) hasta completar los dos títulos.</p>
+        <h3 data-i18n="tl7-h3">DAM y DAW — Grado Superior</h3>
+        <p data-i18n="tl7-p">Compaginé ambos ciclos formativos, alternando cursos entre Desarrollo de Aplicaciones Multiplataforma (DAM) y Desarrollo de Aplicaciones Web (DAW) hasta completar los dos títulos.</p>
       </div>
     </div>
   </div>
@@ -422,47 +437,47 @@
 <section id="proyectos">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="eyebrow">Lo que he construido</div>
-      <h2>Proyectos</h2>
+      <div class="eyebrow" data-i18n="proyectos-eyebrow">Lo que he construido</div>
+      <h2 data-i18n="proyectos-h2">Proyectos</h2>
     </div>
     <div class="projects-grid">
 
       <div class="project-card">
-        <div class="project-status">Publicado en Google Play</div>
+        <div class="project-status" data-i18n="p1-status">Publicado en Google Play</div>
         <h3>Sudoku Master: Classic Logic</h3>
-        <div class="project-names">App móvil de Sudoku clásico</div>
-        <p>Juego de Sudoku para Android, publicado y disponible para descarga, con soporte multi-idioma y estadísticas de progreso.</p>
+        <div class="project-names" data-i18n="p1-names">App móvil de Sudoku clásico</div>
+        <p data-i18n="p1-desc">Juego de Sudoku para Android, publicado y disponible para descarga, con soporte multi-idioma y estadísticas de progreso.</p>
         <div class="project-tags">
           <span class="ptag mono">Kotlin</span>
           <span class="ptag mono">Jetpack Compose</span>
           <span class="ptag mono">Android Studio</span>
         </div>
         <div class="project-links">
-          <a class="sigil primary" href="https://play.google.com/store/apps/details?id=com.osirisstudio.sudokumaster" target="_blank" rel="noopener">Ver en Google Play</a>
+          <a class="sigil primary" href="https://play.google.com/store/apps/details?id=com.osirisstudio.sudokumaster" target="_blank" rel="noopener" data-i18n="p1-link">Ver en Google Play</a>
         </div>
       </div>
 
       <div class="project-card">
-        <div class="project-status">En producción</div>
+        <div class="project-status" data-i18n="p2-status">En producción</div>
         <h3>Vektra</h3>
-        <div class="project-names">Bot de Discord</div>
-        <p>Traducción de canales en tiempo real, un minijuego de Ahorcado competitivo (rankings, rachas, duelos, logros), roles por reacción, recordatorios y un tier Premium. En desarrollo activo, con nuevas funciones constantemente.</p>
+        <div class="project-names" data-i18n="p2-names">Bot de Discord</div>
+        <p data-i18n="p2-desc">Traducción de canales en tiempo real, un minijuego de Ahorcado competitivo (rankings, rachas, duelos, logros), roles por reacción, recordatorios y un tier Premium. En desarrollo activo, con nuevas funciones constantemente.</p>
         <div class="project-tags">
           <span class="ptag mono">Node.js</span>
           <span class="ptag mono">Discord.js</span>
           <span class="ptag mono">SQLite</span>
         </div>
         <div class="project-links">
-          <a class="sigil primary" href="https://discord.com/oauth2/authorize?client_id=1476333421050728458&scope=bot%20applications.commands&permissions=537218048" target="_blank" rel="noopener">Invitar al bot</a>
-          <a class="sigil" href="https://discord.gg/JXSqdHF" target="_blank" rel="noopener">Discord de soporte</a>
+          <a class="sigil primary" href="https://discord.com/oauth2/authorize?client_id=1476333421050728458&scope=bot%20applications.commands&permissions=537218048" target="_blank" rel="noopener" data-i18n="p2-link1">Invitar al bot</a>
+          <a class="sigil" href="https://discord.gg/JXSqdHF" target="_blank" rel="noopener" data-i18n="p2-link2">Discord de soporte</a>
         </div>
       </div>
 
       <div class="project-card">
-        <div class="project-status paused">En pausa</div>
+        <div class="project-status paused" data-i18n="p3-status">En pausa</div>
         <h3>Roguelite de horda medieval</h3>
-        <div class="project-names">Proyecto personal en Unity</div>
-        <p>Juego de supervivencia contra hordas ambientado en fantasía medieval. Aparcado mientras termino de definir el diseño — lo retomaré.</p>
+        <div class="project-names" data-i18n="p3-names">Proyecto personal en Unity</div>
+        <p data-i18n="p3-desc">Juego de supervivencia contra hordas ambientado en fantasía medieval. Aparcado mientras termino de definir el diseño — lo retomaré.</p>
         <div class="project-tags">
           <span class="ptag mono">Unity</span>
           <span class="ptag mono">C#</span>
@@ -471,17 +486,17 @@
       </div>
 
       <div class="project-card">
-        <div class="project-status">Publicado en itch.io</div>
+        <div class="project-status" data-i18n="p4-status">Publicado en itch.io</div>
         <h3>Purrfect Chaos</h3>
-        <div class="project-names">Plataformas 2D — proyecto del Curso de Especialización</div>
-        <p>Plataformas 2D retro en pixel art: controlas a un gato travieso que debe romper el mayor número de objetos frágiles posible mientras esquiva a los perros que intentan detenerlo.</p>
+        <div class="project-names" data-i18n="p4-names">Plataformas 2D — proyecto del Curso de Especialización</div>
+        <p data-i18n="p4-desc">Plataformas 2D retro en pixel art: controlas a un gato travieso que debe romper el mayor número de objetos frágiles posible mientras esquiva a los perros que intentan detenerlo.</p>
         <div class="project-tags">
           <span class="ptag mono">Unity</span>
           <span class="ptag mono">C#</span>
           <span class="ptag mono">Pixel Art</span>
         </div>
         <div class="project-links">
-          <a class="sigil primary" href="https://osirisftw.itch.io/purrfect-chaos" target="_blank" rel="noopener">Jugar en itch.io</a>
+          <a class="sigil primary" href="https://osirisftw.itch.io/purrfect-chaos" target="_blank" rel="noopener" data-i18n="p4-link">Jugar en itch.io</a>
         </div>
       </div>
 
@@ -491,16 +506,16 @@
 
 <footer id="contacto">
   <div class="wrap reveal">
-    <h2>Forjemos algo juntos</h2>
-    <p class="sub">Si buscas a alguien que se tome la arquitectura y el rendimiento tan en serio como el propio juego, hablemos.</p>
+    <h2 data-i18n="footer-h2">Forjemos algo juntos</h2>
+    <p class="sub" data-i18n="footer-sub">Si buscas a alguien que se tome la arquitectura y el rendimiento tan en serio como el propio juego, hablemos.</p>
     <div class="sigils">
       <a class="sigil primary" href="mailto:guillermo_amado@hotmail.es">✉ guillermo_amado@hotmail.es</a>
       <a class="sigil" href="https://github.com/Guille87" target="_blank" rel="noopener">GitHub</a>
       <a class="sigil" href="https://www.linkedin.com/in/guillermo-amado-d%C3%ADaz/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <div class="fine">
-      <span>Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles</span>
-      <span>© 2026 · A Coruña, España</span>
+      <span data-i18n="footer-fine1">Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles</span>
+      <span data-i18n="footer-fine2">© 2026 · A Coruña, España</span>
     </div>
   </div>
 </footer>
@@ -547,6 +562,189 @@
       navLinks.style.gap = '14px';
     });
   }
+
+  /* ---------- I18N ---------- */
+  var translations = {
+    'nav-inicio': 'Home',
+    'nav-sobre': 'About',
+    'nav-habilidades': 'Skills',
+    'nav-cronica': 'Timeline',
+    'nav-proyectos': 'Projects',
+    'nav-contacto': 'Contact',
+    'nav-toggle-aria': 'Open menu',
+
+    'hero-eyebrow': 'Video games · Mobile apps · Software development',
+    'hero-role': 'Developer of <strong>video games and mobile apps</strong>.',
+    'hero-pitch': 'Right now I maintain Sudoku Master: Classic Logic (published on Google Play) and keep expanding Vektra, a Discord bot in production, while I pick back up a personal game project in Unity.',
+    'hero-contact': '✉ Contact',
+    'hero-viewprojects': 'View projects',
+
+    'about-eyebrow': 'The developer',
+    'about-h2': 'About me',
+    'about-p1': 'I\'m a <strong>video game and mobile app</strong> developer. I like to see projects through to the end, not just to the prototype.',
+    'about-p2': 'Right now that means maintaining <strong>Sudoku Master: Classic Logic</strong>, published on Google Play, continuing to expand <strong>Vektra</strong> (a Discord bot in production), and soon picking back up my own Unity game project, currently on hold while I finish nailing down its ideas.',
+    'vital-loc-label': 'Location',
+    'vital-loc-value': 'A Coruña, Galicia, Spain',
+    'vital-areas-label': 'Areas',
+    'vital-areas-value': 'Video games · Mobile apps · Bots',
+    'vital-stack-label': 'Stack',
+    'vital-now-label': 'Right now',
+    'vital-now-value': 'Sudoku Master: Classic Logic &amp; Vektra in production',
+
+    'skills-eyebrow': 'Character sheet',
+    'skills-h2': 'Skills',
+
+    'b1-h3': 'Architecture & code',
+    'b1-desc': 'Clean, scalable, tested C#.',
+    'b1-s1-name': 'SOLID and design patterns',
+    'b1-s2-name': 'Dependency injection',
+    'b1-s3-name': 'Events and interfaces',
+
+    'b2-h3': 'Unity systems',
+    'b2-desc': 'Mastery of the engine and its lifecycle.',
+
+    'b3-h3': 'Optimization',
+    'b3-desc': 'Performance as part of the design, not a patch.',
+    'b3-s1-name': 'Object pooling',
+    'b3-s2-name': 'GC and draw call management',
+    'b3-s3-name': 'Addressables and async loading',
+
+    'b4-h3': 'Tools & practice',
+    'b4-desc': 'The craft behind the code.',
+    'b4-s1-name': 'Git and version control',
+    'b4-s2-name': 'Profiler and diagnostics',
+    'b4-s3-name': 'Unit testing',
+
+    'b5-desc': 'From Android Studio to an app published on Google Play.',
+    'b5-s3-name': 'Google Play publishing',
+
+    'b6-desc': 'Production services, not just scripts.',
+    'b6-s2-name': 'Discord.js / REST APIs',
+    'b6-s3-name': 'SQLite and persistence',
+
+    'tag-adv': 'ADVANCED',
+    'tag-solid': 'SOLID',
+
+    'cronica-eyebrow': 'Journey',
+    'cronica-h2': 'Chronicle',
+
+    'tl1-period': 'July 2026',
+    'tl1-h3': 'Vektra: Hangman, reaction roles, reminders and Premium',
+    'tl1-p': 'Picked <strong>Vektra</strong>\'s development back up after several months on hold, adding a competitive Hangman minigame (rankings, streaks, duels), reaction-role assignment, reminders, and a Premium tier to support the bot.',
+
+    'tl2-period': 'July 2026',
+    'tl2-h3': 'First prototype of the medieval horde roguelite',
+    'tl2-p': 'A first 2-3 day pass at a personal Unity project, still with placeholder art and systems. On hold until the core mechanics are clear.',
+
+    'tl3-period': 'March – May 2026',
+    'tl3-h3': 'Sudoku Master: Classic Logic',
+    'tl3-p': 'Built from scratch to its Google Play release in just over a month and a half (May 21, 2026), with continuous updates and fixes since.',
+
+    'tl4-period': 'March 2026',
+    'tl4-h3': 'Vektra\'s first prototype',
+    'tl4-p': 'A week implementing real-time channel translation, before shelving it to focus on developing <strong>Sudoku Master: Classic Logic</strong>.',
+
+    'tl5-h3': 'Specialization Course in Video Game Development and Virtual Reality',
+    'tl5-p': 'Focused training in video game development and virtual reality, after completing vocational training, to go deeper into the area that interested me most. As the course\'s (optional) project, I developed <strong>Purrfect Chaos</strong>, a 2D platformer in Unity.',
+
+    'tl6-period': 'January 2022 – April 2023',
+    'tl6-h3': 'Firmatel — Mobile app developer',
+    'tl6-p': 'The company\'s sole mobile developer: built a clock-in app from scratch (tracking work start/end times), connected to the existing database and structure of their web platform.',
+
+    'tl7-h3': 'DAM and DAW — Higher-level Vocational Training',
+    'tl7-p': 'Combined both programs, alternating courses between Multiplatform App Development (DAM) and Web App Development (DAW) until completing both qualifications.',
+
+    'proyectos-eyebrow': 'What I\'ve built',
+    'proyectos-h2': 'Projects',
+
+    'p1-status': 'Published on Google Play',
+    'p1-names': 'Classic Sudoku mobile app',
+    'p1-desc': 'Sudoku game for Android, published and available to download, with multi-language support and progress statistics.',
+    'p1-link': 'View on Google Play',
+
+    'p2-status': 'In production',
+    'p2-names': 'Discord bot',
+    'p2-desc': 'Real-time channel translation, a competitive Hangman minigame (rankings, streaks, duels, achievements), reaction roles, reminders, and a Premium tier. Actively developed, with new features constantly.',
+    'p2-link1': 'Invite the bot',
+    'p2-link2': 'Support Discord',
+
+    'p3-status': 'Paused',
+    'p3-names': 'Personal Unity project',
+    'p3-desc': 'A horde-survival game set in medieval fantasy. On hold while I finish nailing down the design — I\'ll pick it back up.',
+
+    'p4-status': 'Published on itch.io',
+    'p4-names': '2D platformer — Specialization Course project',
+    'p4-desc': 'Retro pixel-art 2D platformer: you control a mischievous cat that must break as many fragile objects as possible while dodging the dogs trying to stop it.',
+    'p4-link': 'Play on itch.io',
+
+    'footer-h2': 'Let\'s build something together',
+    'footer-sub': 'If you\'re looking for someone who takes architecture and performance as seriously as the game itself, let\'s talk.',
+    'footer-fine1': 'Guillermo Amado Díaz — Video game and mobile app developer',
+    'footer-fine2': '© 2026 · A Coruña, Spain'
+  };
+
+  var pageMeta = {
+    es: {
+      title: 'Guillermo Amado Díaz — Desarrollador de videojuegos y apps móviles',
+      description: 'Guillermo Amado Díaz — desarrollador de videojuegos y aplicaciones móviles. Unity/C#, Kotlin/Jetpack Compose, Node.js.'
+    },
+    en: {
+      title: 'Guillermo Amado Díaz — Video Game and Mobile App Developer',
+      description: 'Guillermo Amado Díaz — video game and mobile app developer. Unity/C#, Kotlin/Jetpack Compose, Node.js.'
+    }
+  };
+
+  var i18nEls = document.querySelectorAll('[data-i18n]');
+  var originals = {};
+  i18nEls.forEach(function(el, idx){
+    originals[idx] = el.innerHTML;
+  });
+
+  var langToggle = document.getElementById('langToggle');
+
+  function applyLang(lang){
+    document.documentElement.lang = lang;
+    langToggle.setAttribute('data-lang', lang);
+
+    i18nEls.forEach(function(el, idx){
+      var key = el.getAttribute('data-i18n');
+      if(lang === 'en' && translations.hasOwnProperty(key)){
+        if(el.hasAttribute('data-i18n-attr')){
+          el.setAttribute(el.getAttribute('data-i18n-attr'), translations[key]);
+        } else {
+          el.innerHTML = translations[key];
+        }
+      } else {
+        if(el.hasAttribute('data-i18n-attr')){
+          el.setAttribute(el.getAttribute('data-i18n-attr'), originals[idx]);
+        } else {
+          el.innerHTML = originals[idx];
+        }
+      }
+    });
+
+    var meta = pageMeta[lang];
+    document.getElementById('pageTitle').textContent = meta.title;
+    document.getElementById('metaDescription').setAttribute('content', meta.description);
+    document.getElementById('ogTitle').setAttribute('content', meta.title);
+    document.getElementById('ogDescription').setAttribute('content', meta.description);
+
+    try{ localStorage.setItem('lang', lang); }catch(err){}
+  }
+
+  if(langToggle){
+    langToggle.addEventListener('click', function(){
+      var current = langToggle.getAttribute('data-lang');
+      applyLang(current === 'es' ? 'en' : 'es');
+    });
+  }
+
+  var savedLang = null;
+  try{ savedLang = localStorage.getItem('lang'); }catch(err){}
+  if(!savedLang){
+    savedLang = (navigator.language || '').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+  }
+  if(savedLang === 'en'){ applyLang('en'); }
 </script>
 
 </body>
